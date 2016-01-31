@@ -1,0 +1,32 @@
+{
+  "name": "x-cityweather",
+  "homepage": "https://github.com/TheAlexRamirez/x-cityweather",
+  "authors": [
+    "TheAlexRamirez"
+  ],
+  "description": "Simple Web Component using the OpenWeatherMap API for retrieving some weather data from a selected city.",
+  "main": "x-cityweather/x-cityweather.html",
+  "moduleType": [],
+  "keywords": [
+    "polymer",
+    "weather",
+    "openweather"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.2.4",
+    "paper-input": "PolymerElements/paper-input#^1.1.5",
+    "iron-ajax": "PolymerElements/iron-ajax#^1.1.1",
+    "paper-card": "PolymerElements/paper-card#^1.1.1",
+    "paper-item": "PolymerElements/paper-item#^1.1.3",
+    "iron-icon": "PolymerElements/iron-icon#^1.0.7",
+    "iron-icons": "PolymerElements/iron-icons#^1.1.2"
+  }
+}

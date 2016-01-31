@@ -1,0 +1,113 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+<link rel="import" href="../paper-card/paper-card.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../paper-item/paper-item.html">
+
+<dom-module id="x-cityweather">
+<style>
+	
+	#act-temp {
+		
+	}
+	
+</style>
+
+<template>
+<iron-ajax onload="fetchWeather()" id="requestWeather" url="http://api.openweathermap.org/data/2.5/weather" handle-as="json"></iron-ajax>
+<paper-card heading="City Weather">
+	<div class="card-content">
+	<paper-input bind-value="{{city}}" label="Enter the city ..."></paper-input>
+
+	<h2>{{temperature}} °F</h2>
+	<h4>Climate:  {{description}}</h4>	
+	<h4>Min Temperature: {{min_temperature}} °F</h4>
+	<h4>Max Temperature: {{max_temperature}} °F</h4>
+	<h4>Windspeed: {{windspeed}} m/s</h4>
+	<h4>Humidity: {{humidity}} %</h4>
+	<h4>Country: {{country}}</h4>
+       
+	</div>
+</paper-card>
+
+</template>
+
+</dom-module>
+
+
+<script>
+    Polymer({
+		is: "x-cityweather",
+		properties: {
+			city: {
+				type: String,
+				value: "",
+				observer: "fetchWeather"
+			},
+			description:{
+				type: String
+			},
+			temperature: {
+				type: String
+			}, 
+			min_temperature: {
+				type: String
+			},
+			max_temperature: {
+				type: String
+			},
+			windspeed: {
+				type: String
+			},
+			humidity: {
+				type: String
+			},
+			country: {
+				type: String
+			}			
+		},
+		params:
+		{
+			type: Object,
+			value: ''
+		},	
+		showResponse: function() 
+		{
+			res=result;
+			this.description=res.weather[0].main;
+			this.temperature=res.main.temp;
+			this.min_temperature=res.main.temp_min;
+			this.max_temperature=res.main.temp_max;
+			this.windspeed=res.wind.speed;
+			this.humidity=res.main.humidity;
+			this.country=res.sys.country;
+			
+			
+		},		
+			
+		fetchWeather: function() 
+		{
+			console.log(this.city);
+			this.params.appid="736b2bdcbc9ca554909ec693ebeab4a5";
+			this.params.q=this.city;
+			this.$.requestWeather.params=this.params;
+			this.$.requestWeather.generateRequest();
+			result=this.$.requestWeather.lastResponse;
+			this.showResponse(result);
+			
+		},
+		ready : function()
+		{
+			this.fetchWeather();
+			
+		}
+		
+		
+	});
+	
+	
+</script>
+
+
